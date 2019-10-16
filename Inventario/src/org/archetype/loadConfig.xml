@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<context:property-placeholder location="/WEB-INF/config/common.properties"/>
+	
+	<import resource="/common/config/business.xml"/>
+	<import resource="/common/config/servlet.xml"/>
+	<import resource="/common/config/controller.xml"/>
+	<import resource="/common/config/dao.xml"/>
+	
+	<import resource="../inventario/ecie/config/business.xml"/>
+	<import resource="../inventario/ecie/config/servlet.xml"/>
+	<import resource="../inventario/ecie/config/controller.xml"/>
+	<import resource="../inventario/ecie/config/dao.xml"/>
+	
+	<!-- acceso a datos -->
+	<import resource="/common/config/orm.xml"/>
+	
+	<!-- seguridad -->
+	<import resource="/common/config/security.xml"/>
+	
+	<!-- auditoria -->
+	<import resource="/common/config/audit.xml"/>
+		
+	<!-- servicios web-->
+	<!-- descomentar los beans handlerMappingCXF y cxfController de WebContent/WEB-INF/Common-servlet.xml -->
+	<!-- <import resource="/common/config/webservices.xml" /> -->
+	
+	<bean id="menuJSON" class="org.json.JSONArray">
+		<constructor-arg index="0" type="java.lang.String">
+			<value>
+			[
+				
+									
+				{ text: 'Administración', icon: '../img/common/group.png', 
+					children: [
+						{ text: 'Usuarios y Permisos', icon: '../img/common/group.png', leaf: true, url: '../common/listarUsuario.htm'},
+						{ text: 'Roles', icon: '../img/common/group.png', leaf: true, url: '../common/listarRol.htm'},
+						{ text: 'Acciones', icon: '../img/common/group.png', leaf: true, url: '../common/listarAccion.htm'},
+						{ text: 'Auditoría', icon: '../img/common/group.png', leaf: true, url: '../common/listarAudit.htm'},								
+						{ text: 'Desconectar Usuarios', icon: '../img/common/group.png', leaf: true, url: '../common/listarSecurity.htm'}
+					]},
+				{ text: 'Movimientos', icon: '../img/common/Movimientos.PNG',
+					children: [
+					   <!--  { text: 'Carga Inicial', icon: '../img/common/group.png', leaf: true, url: '../ecie/listarCargaInicial.htm'},-->
+					    { text: 'Recepción a Ciegas', icon: '../img/common/ValesEntrada.PNG', leaf: true, url: '../ecie/listarRecepcionACiegas.htm?param=RecepcionACiegas'},
+					    { text: 'Informe Recepción', icon: '../img/common/ValesEntrada.PNG', leaf: true, url: '../ecie/listarRecepcion.htm?param=Recepcion'},
+					    { text: 'Vale de Entrega', icon: '../img/common/ValesSalida.PNG', leaf: true, url: '../ecie/listarSolicitudEntrega.htm?param=SolicitudEntrega'},
+					    { text: 'Transferencia entre Almacenes', icon: '../img/common/favicon.png', leaf: true, url: '../ecie/listarTransEntreAlmacenes.htm?param=TransferenciaEntreAlmacenes'},
+					    { text: 'Transferencia Entrada', icon: '../img/common/ValesEntrada.PNG', leaf: true, url: '../ecie/listarTransEntrada.htm?param=TransferenciaEntrada'},
+					    { text: 'Transferencia Salida', icon: '../img/common/ValesSalida.PNG', leaf: true, url: '../ecie/listarTransSalida.htm?param=TransferenciaSalida'},
+					    { text: 'Entrada por Ajuste', icon: '../img/common/ValesEntrada.PNG', leaf: true, url: '../ecie/listarEntradaPorAjuste.htm?param=EntradaPorAjuste'},
+					    { text: 'Salida por Ajuste', icon: '../img/common/ValesSalida.PNG', leaf: true, url: '../ecie/listarSalidaPorAjuste.htm?param=SalidaPorAjuste'},
+					    { text: 'Devoluciones', icon: '../img/common/ValesEntrada.PNG', leaf: true, url: '../ecie/listarDevolucion.htm?param=Devolucion'},
+					    { text: 'Reclamaciones', icon: '../img/common/Compras.png', leaf: true, url: '../ecie/listarReclamacion.htm?param=Reclamacion'}
+					]},
+				{ text: 'Facturacion', icon: '../img/common/indiceFactura.jpg', 
+					children: [								
+						{ text: 'Facturas en Moneda Nacional', icon: '../img/common/indiceFactura1.jpg', leaf: true, url: '../ecie/listarFacturaMN.htm?param=FacturaMN'},
+						{ text: 'Factura en Moneda Convertible', icon: '../img/common/indiceFactura2.jpg', leaf: true, url: '../ecie/listarFacturaMLC.htm?param=FacturaMLC'},
+						{ text: 'Factura en las dos Monedas', icon: '../img/common/indiceFactura3.jpg', leaf: true, url: '../ecie/listarFactura_MN_MLC.htm?param=Factura_MN_MLC'}
+					]},	
+				{ text: 'Inventario Físico', icon: '../img/common/IFisico.PNG',
+					children: [
+						{ text: 'Tarjetero', icon: '../img/common/Tarjetero.PNG', leaf: true, url: '../ecie/listarTarjetero.htm'},
+						{ text: 'Existencia', icon: '../img/common/InvFisico.PNG', leaf: true, url: '../ecie/listarExistencia.htm'},
+						{ text: 'Inventario', icon: '../img/common/conciliacion.png', leaf: true, url: '../ecie/listarInventario.htm'}					
+					]},
+				<!-- { text: 'Reportes', icon: '../img/common/group.png',
+					children: [
+						{ text: 'Inventario Periódico', icon: '../img/common/group.png', leaf: true, url: '../ecie/listarTarjetero.htm'},
+						{ text: 'Movimiento de Productos', icon: '../img/common/group.png', leaf: true, url: '../ecie/listarTarjetero.htm'}
+					
+					]}, -->	
+				{ text: 'Nomencladores', icon: '../img/common/nomencladores.png',
+					children: [
+					    { text: 'Ecie', icon: '../img/common/este.png', leaf: true, url: '../ecie/listarEcie.htm'},
+						{ text: 'Establecimientos Ecie', icon: '../img/common/Establecimiento.PNG', leaf: true, url: '../ecie/listarEstablecimiento.htm'},
+						{ text: 'Trabajadores', icon: '../img/common/Trabajador.PNG', leaf: true, url: '../ecie/listarResponsable.htm'},
+						{ text: 'Centros de Costo', icon: '../img/common/CentroCosto.PNG', leaf: true, url: '../ecie/listarCentroCosto.htm'},
+						{ text: 'Almacén', icon: '../img/common/Almacen.PNG', leaf: true, url: '../ecie/listarAlmacen.htm'},
+						{ text: 'Unidades de Medida', icon: '../img/common/UnidadMedida.PNG', leaf: true, url: '../ecie/listarUnidadMedida.htm'},
+						{ text: 'Familia de Producto', icon: '../img/common/FamiliaProducto.PNG', leaf: true, url: '../ecie/listarClasificador.htm'},
+						{ text: 'Producto', icon: '../img/common/Producto.PNG', leaf: true, url: '../ecie/listarProducto.htm'},
+						{ text: 'Organismos', icon: '../img/common/Organismo.PNG', leaf: true, url: '../ecie/listarOrganismo.htm'},
+						{ text: 'Proveedores', icon: '../img/common/Proveedor.PNG', leaf: true, url: '../ecie/listarEmpresa.htm'}
+						
+					]},
+					
+					
+						
+					
+			]					
+			</value>
+		</constructor-arg>
+	</bean>	
+</beans>

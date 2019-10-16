@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="Empresa" table="`Empresa`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Empresa`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_Empresa`" type="long" insert="false" update="false"/>
+  	<property name="nombre" column="`Nombre`" type="string" not-null="true"/>
+  	<property name="descripcion" column="`Descripcion`" type="string"/>
+  	<property name="direccion" column="`Direccion`" type="string"/>
+  	<property name="reup" column="`CodigoReup`" type="string" not-null="true"/>
+  	
+  	<property name="codigoNit" column="`CodigoNit`" type="string" not-null="true"/>
+  	<property name="agenciaMn" column="`AgenciaMn`" type="int" not-null="true"/>
+  	<property name="agenciaMlc" column="`AgenciaMlc`" type="int" not-null="true"/>
+  	
+  	<property name="resolDirectora" column="`ResolucionDirectora`" type="string" not-null="false"/>
+  	
+  	<property name="cuentaMlc" column="`CuentaCuc`" type="string" not-null="true"/>
+  	
+  	<property name="tituloMlc" column="`TituloCuentaCuc`" type="string" not-null="false"/>
+  	
+  	<property name="cuentaMn" column="`CuentaCup`" type="string" not-null="true"/>
+  	
+  	<property name="tituloMn" column="`TituloCuentaCup`" type="string" not-null="false"/>
+  	
+  	<property name="telefono" column="`Telefono`" type="long" not-null="true"/>
+  	
+  	<property name="correo" column="`Correo`" type="string" not-null="false"/>
+  	<property name="fax" column="`Fax`" type="string" not-null="false"/>
+  	    
+    <many-to-one name="organismo" class="Organismo" column="`Id_Organismo`" lazy="proxy" not-null="true"/>
+  </class>
+</hibernate-mapping>

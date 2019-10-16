@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="CentroCosto" table="`CentroCosto`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_CentroCosto`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_CentroCosto`" type="long" insert="false" update="false"/>
+  	<property name="nombre" column="`NombreCentroCosto`" type="string" not-null="true"/>
+  	<property name="descripcion" column="`DescripcionCentroCosto`" type="string"/>
+  	<property name="codigo" column="`Codigo`" type="string" not-null="true"/>
+  </class>
+</hibernate-mapping>

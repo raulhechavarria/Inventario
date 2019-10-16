@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ValeProductoCISubReport" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<field name="cantProdVale" class="java.lang.Double"/>
+	<field name="precioMNVale" class="java.lang.Double"/>
+	<field name="importeMNVale" class="java.lang.Double"/>
+	<field name="importeMLCVale" class="java.lang.Double"/>
+	<field name="precioMLCVale" class="java.lang.Double"/>
+	<field name="producto.codigo" class="java.lang.String"/>
+	<field name="producto.nombre" class="java.lang.String"/>
+	<field name="producto.unidad.nombre" class="java.lang.String"/>
+	<field name="recargoDescuentoMN" class="java.lang.Double"/>
+	<field name="recargoDescuentoMLC" class="java.lang.Double"/>
+	<field name="totalMN" class="java.lang.Double"/>
+	<field name="totalMLC" class="java.lang.Double"/>
+	<field name="existenciaOrigen" class="java.lang.Double"/>
+	<field name="existenciaDestino" class="java.lang.Double"/>
+	<field name="producto.clasificadorProducto.nombre" class="java.lang.String"/>
+	<variable name="ImpTotalCUP" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{importeMNVale}]]></variableExpression>
+	</variable>
+	<variable name="ImpTotalCUC" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{importeMLCVale}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="35">
+			<staticText>
+				<reportElement x="4" y="19" width="209" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="19" width="66" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Familia ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="19" width="57" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="19" width="71" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="19" width="34" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="18" width="672" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="3" y="19" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="213" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="325" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="389" y="19" width="65" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Precio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="286" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="533" y="19" width="67" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="603" y="19" width="71" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<line>
+				<reportElement x="387" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="457" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="532" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="601" y="19" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="675" y="2" width="1" height="33" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="389" y="2" width="141" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ CUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="533" y="2" width="141" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ CUC]]></text>
+			</staticText>
+			<line>
+				<reportElement x="532" y="2" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="387" y="2" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="387" y="1" width="288" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="3" y="1" width="1" height="14" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="286" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="387" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="###0.000" isBlankWhenNull="true">
+				<reportElement x="329" y="1" width="57" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cantProdVale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="459" y="1" width="71" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{importeMNVale}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="213" y="1" width="1" height="14" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="289" y="1" width="34" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto.unidad.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="5" y="1" width="208" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto.codigo}+"-"+$F{producto.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00000" isBlankWhenNull="true">
+				<reportElement x="389" y="1" width="67" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{precioMNVale}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="325" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="###0.00000" isBlankWhenNull="true">
+				<reportElement x="533" y="1" width="67" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{precioMLCVale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="603" y="1" width="70" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{importeMLCVale}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="457" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="532" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="601" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="675" y="1" width="1" height="15" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="216" y="1" width="66" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto.clasificadorProducto.nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="0" width="672" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="18">
+			<staticText>
+				<reportElement x="288" y="1" width="97" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Total]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="455" y="2" width="76" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ImpTotalCUP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="598" y="2" width="76" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ImpTotalCUC}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="387" y="1" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="532" y="1" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="675" y="1" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="286" y="1" width="1" height="16" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="287" y="17" width="388" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="4" y="0" width="671" height="1" isPrintWhenDetailOverflows="true" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

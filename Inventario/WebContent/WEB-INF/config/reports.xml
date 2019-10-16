@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+<bean id="baseXLS" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView" lazy-init="true" abstract="true">
+		<property name="exporterParameters">
+			<map>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_COLLAPSE_ROW_SPAN" value="true"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS" value="true"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS" value="true"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET" value="false"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_DETECT_CELL_TYPE" value="false"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND" value="false"/>
+				<entry key="net.sf.jasperreports.engine.export.JRXlsExporterParameter.IS_IGNORE_GRAPHICS" value="false"/>
+			</map>
+		</property>
+	</bean>	
+	
+	<bean id="NomencladorReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/NomencladorReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="EcieReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/EcieReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ClasificadorReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ClasificadorReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ProductoReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ProductoReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="UnidadMedidaReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/UnidadMedidaReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="AlmacenReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/AlmacenReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="EmpresasReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/EmpresasReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="DetallesEmpresaReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetallesEmpresaReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="EstablecimientoReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/EstablecimientoReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="OrganismoReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/OrganismoReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ResponsableReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ResponsableReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="CentroCostoReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/CentroCostoReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="InventarioReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/InventarioReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="InventarioXFechasReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/InventarioXFechasReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="ExistenciaReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ExistenciaReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ExistenciaFamiliaReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ExistenciaFamiliaReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="OciososFamiliaReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/OciososFamiliaReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeIRReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeIRReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeRACReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeRACReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="ValeCIReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeCIReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeEPAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeEPAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+		<bean id="ValeSPAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeSPAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeSEReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeSEReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeTEAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeTEAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeTEReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeTEReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeTSReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeTSReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeDReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeDReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="ValeIRecReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeIRecReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="ValeFactReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/ValeFactReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>	
+	<bean id="DetalleValeIRReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeIRReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoIRSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>		
+	<bean id="DetalleValeRACReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeRACReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoRACSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>		
+	<bean id="DetalleValeCIReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeCIReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoCISubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="DetalleValeEPAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeEPAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoEPASubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeSPAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeSPAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoSPASubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeSEReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeSEReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoSESubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="DetalleValeTEAReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeTEAReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoTEASubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="DetalleValeTEReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeTEReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoTESubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="DetalleValeTSReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeTSReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoTSSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="DetalleValeDReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeDReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoDSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeIRecReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeIRecReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoIRecSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeFactMNReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeFactMNReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoFactMNSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeFactMLCReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeFactMLCReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoFactMLCSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="DetalleValeFact_MN_MLCReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetalleValeFact_MN_MLCReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+		<property name="subReportUrls">
+			<props>
+				<prop key="ValeProducto">/WEB-INF/views/reports/ValeProductoFact_MN_MLCSubReport.jasper</prop>
+			</props>
+		</property>
+		<property name="subReportDataKeys">
+			<list>
+				<value>ValeProductoDataSource</value>
+			</list>
+		</property>
+	</bean>	
+
+	<bean id="CuadreDiarioReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/CuadreDiarioReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+	<bean id="DetallesTarjeteroReport" class="org.archetype.common.web.utils.JasperReportsJExcelApiView" lazy-init="true">
+		<property name="url" value="/WEB-INF/views/reports/DetallesTarjeteroReport.jasper"/>
+		<property name="reportDataKey" value="dataSource"/>
+	</bean>
+		
+</beans>

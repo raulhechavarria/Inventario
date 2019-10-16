@@ -1,0 +1,1 @@
+from Vale v where year(v.fechaVale)=:anno and month(v.fechaVale)=:mes

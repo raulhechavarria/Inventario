@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="ClasificadorProducto" table="`ClasificadorProducto`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_ClasificadorProducto`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_ClasificadorProducto`" type="long" insert="false" update="false"/>
+  	<property name="nombre" column="`NombreClasificadorProducto`" type="string" not-null="true"/>
+  	<property name="descripcion" column="`DescripcionClasificadorProducto`" type="string"/>
+  </class>
+</hibernate-mapping>

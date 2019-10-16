@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ValeFactReport" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="15" bottomMargin="5">
+	<parameter name="Logo" class="java.io.File"/>
+	<field name="almacenOrigen.nombre" class="java.lang.String"/>
+	<field name="almacenDestino.nombre" class="java.lang.String"/>
+	<field name="almacenOrigen.establecimientoEcie.nombre" class="java.lang.String"/>
+	<field name="almacenDestino.establecimientoEcie.nombre" class="java.lang.String"/>
+	<field name="centroCosto.nombre" class="java.lang.String"/>
+	<field name="empresa.nombre" class="java.lang.String"/>
+	<field name="noVale" class="java.lang.String"/>
+	<field name="noControl" class="java.lang.String"/>
+	<field name="fchResponsAutoriza" class="java.util.Date"/>
+	<field name="comentario" class="java.lang.String"/>
+	<field name="responsAutoriza.nombre" class="java.lang.String"/>
+	<field name="responsAutoriza.apellido1" class="java.lang.String"/>
+	<field name="responsAutoriza.apellido2" class="java.lang.String"/>
+	<field name="solicElab.nombre" class="java.lang.String"/>
+	<field name="solicElab.apellido1" class="java.lang.String"/>
+	<field name="solicElab.apellido2" class="java.lang.String"/>
+	<field name="recibido.nombre" class="java.lang.String"/>
+	<field name="recibido.apellido1" class="java.lang.String"/>
+	<field name="recibido.apellido2" class="java.lang.String"/>
+	<field name="fchSolicElab" class="java.util.Date"/>
+	<field name="fchRecibido" class="java.util.Date"/>
+	<field name="fechaVale" class="java.util.Date"/>
+	<field name="totalMN" class="java.lang.Double"/>
+	<field name="recargoDescuentoMN" class="java.lang.Double"/>
+	<field name="recargoDescuentoMLC" class="java.lang.Double"/>
+	<field name="totalMLC" class="java.lang.Double"/>
+	<field name="serviciosMN" class="java.lang.Double"/>
+	<field name="serviciosMLC" class="java.lang.Double"/>
+	<field name="tipoVale" class="org.inventario.ecie.domain.TipoVale"/>
+	<field name="estadoVale" class="org.inventario.ecie.domain.EstadoVale"/>
+	<field name="noDoc" class="java.lang.String"/>
+	<field name="operacionFactura" class="org.inventario.ecie.domain.OperacionFactura"/>
+	<field name="importeMLC" class="java.lang.Double"/>
+	<field name="importeMN" class="java.lang.Double"/>
+	<variable name="recargoCUP" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[($F{recargoDescuentoMN} == null || 
+ $F{recargoDescuentoMN}.equals(new Double(0.00))? new Double(0.00):
+    $F{tipoVale}.name() == "Factura_MN_MLC"? 
+	new Double(($F{importeMN}.doubleValue()*
+                    $F{recargoDescuentoMN}.doubleValue())/100):
+     new Double((($F{importeMN}.doubleValue()+
+                  $F{importeMLC}.doubleValue())*
+                  $F{recargoDescuentoMN}.doubleValue())/100))]]></variableExpression>
+	</variable>
+	<variable name="recargoCUC" class="java.lang.Double" resetType="Column">
+		<variableExpression><![CDATA[($F{recargoDescuentoMLC} == null ||
+ $F{recargoDescuentoMLC}.equals(new Double(0.00))? new Double(0.00):
+   $F{tipoVale}.name() == "Factura_MN_MLC"?
+     new Double(($F{importeMLC}.doubleValue()*
+                 $F{recargoDescuentoMLC}.doubleValue())/100):
+     new Double((($F{importeMN}.doubleValue()+
+                  $F{importeMLC}.doubleValue())*
+                  $F{recargoDescuentoMLC}.doubleValue())/100)
+  )]]></variableExpression>
+	</variable>
+	<variable name="totalVentasCUC" class="java.lang.Double">
+		<variableExpression><![CDATA[( $F{tipoVale}.name()=="FacturaMLC" ?  
+    new Double($V{recargoCUC}.doubleValue()+
+               $F{importeMLC}.doubleValue()+
+               $F{importeMN}.doubleValue()):
+  $F{tipoVale}.name()=="FacturaMN" ? new Double(0.00) :
+    new Double($V{recargoCUC}.doubleValue()+
+               $F{importeMLC}.doubleValue())
+)]]></variableExpression>
+	</variable>
+	<variable name="totalVentasCUP" class="java.lang.Double">
+		<variableExpression><![CDATA[( $F{tipoVale}.name()=="FacturaMN" ?  
+    new Double($V{recargoCUP}.doubleValue()+
+               $F{importeMLC}.doubleValue()+
+               $F{importeMN}.doubleValue()):
+  $F{tipoVale}.name()=="FacturaMLC" ? new Double(0.00) :
+    new Double($V{recargoCUP}.doubleValue()+
+               $F{importeMN}.doubleValue())
+)]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="240" y="25" width="283" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Facturas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="555" y="3" width="120" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Impresión:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="681" y="3" width="100" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="17" y="4" width="85" height="32"/>
+				<imageExpression class="java.io.File"><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51">
+			<staticText>
+				<reportElement x="414" y="18" width="126" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="34" width="63" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="34" width="44" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="477" y="34" width="63" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="18" width="129" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total al Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="18" width="89" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="542" y="18" width="65" height="32"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Neto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="34" width="55" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="34" width="60" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Ctrl]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="34" width="67" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NoFactura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="0" width="194" height="16"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacén]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="0" width="198" height="16"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="284" height="16"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="34" width="172" height="16"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="63" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Cont.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="34" width="65" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="34" width="65" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="34" width="44" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32">
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="192" y="18" width="65" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalMN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="257" y="18" width="65" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalMLC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="477" y="18" width="63" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalVentasCUC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="369" y="18" width="44" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{recargoCUC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="542" y="18" width="65" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[new Double($V{totalVentasCUC}.doubleValue()+
+           $V{totalVentasCUP}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="9" y="18" width="55" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaVale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="65" y="18" width="67" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{noVale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="132" y="18" width="60" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{noControl}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="9" y="2" width="194" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{almacenOrigen.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="215" y="2" width="198" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{almacenOrigen.establecimientoEcie.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="500" y="2" width="283" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empresa.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="610" y="17" width="175" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{operacionFactura}.name()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="9" y="0" width="774" height="1" forecolor="#999999" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="425" y="2" width="63" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{noDoc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="325" y="17" width="44" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{recargoCUP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="414" y="17" width="63" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalVentasCUP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="597" y="1" width="151" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="755" y="1" width="17" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="9" y="0" width="774" height="1" forecolor="#999999" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

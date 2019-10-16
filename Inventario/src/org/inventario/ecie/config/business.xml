@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+ <bean id="commonService" class="org.archetype.common.business.support.CommonService" abstract="true">
+  <property name="dao" ref="commonDao"/>
+ </bean>
+ <bean id="productoServicio"  parent="commonService" class="org.inventario.ecie.business.support.ProductoServicio">
+  <property name="clazz" value="org.inventario.ecie.domain.Producto"/>
+  <property name="dao" ref="productoDao"></property>
+ </bean>
+ <bean id="empresaServicio"  parent="commonService" class="org.inventario.ecie.business.support.EmpresaServicio">
+  <property name="clazz" value="org.inventario.ecie.domain.Empresa"/>
+ </bean>  
+  <bean id="unidadMedidaServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.UnidadMedida"/>
+ </bean>
+  <bean id="organismoServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.Organismo"/>
+ </bean>
+  <bean id="establecimientoEcieServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.EstablecimientoEcie"/>
+ </bean>
+ <bean id="ecieServicio"  parent="commonService" class="org.inventario.ecie.business.support.EcieServicio">
+  <property name="clazz" value="org.inventario.ecie.domain.Ecie"/>
+  <property name="dao" ref="ecieDao"></property>  
+  <property name="tarjeteroServicio" ref="tarjeteroServicio"></property>
+  <property name="inventarioServicio" ref="inventarioServicio"></property>
+  <property name="valeServicio" ref="valeServicio"></property>
+  <property name="almaceServicio" ref="almacenServicio"></property>
+ </bean>
+  <bean id="almacenServicio"  parent="commonService" class="org.inventario.ecie.business.support.AlmacenServicio">
+  <property name="inventarioServicio" ref="inventarioServicio"/>
+  <property name="ecieServicio" ref="ecieServicio"/>
+  <property name="clazz" value="org.inventario.ecie.domain.Almacen"/>
+ </bean>
+  <bean id="clasificadorProductoServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.ClasificadorProducto"/>
+ </bean>
+  <bean id="responsableServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.Responsable"/>
+ </bean>
+ <bean id="tarjeteroServicio" class="org.inventario.ecie.business.support.TarjeteroServicio" parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.Tarjetero"/>
+  <property name="dao" ref="tarjeteroDao"></property>
+  <property name="daoAlmacen" ref="commonDao"></property>
+  <property name="ecieServicio" ref="ecieServicio"></property>
+ </bean>
+ <bean id="valeServicio" class="org.inventario.ecie.business.support.ValeServicio" parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.Vale"/>
+  <property name="dao" ref="valeDao"></property>
+  <property name="ecieServicio" ref="ecieServicio"></property>
+  <property name="valeProductoServicio" ref="valeProductoServicio"></property>
+ </bean>
+ <bean id="valeProductoServicio" class="org.inventario.ecie.business.support.ValeProductoServicio" parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.ValeProducto"/>
+  <property name="dao" ref="valeProductoDao"></property>
+  <property name="valeDao" ref="valeDao"></property>
+ </bean>
+ <bean id="centroCostoServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.CentroCosto"/>
+ </bean>
+ <bean id="inventarioServicio"  parent="commonService" class="org.inventario.ecie.business.support.InventarioServicio">
+  <property name="clazz" value="org.inventario.ecie.domain.Inventario"/>
+  <property name="dao" ref="inventarioDao"></property>
+  <property name="ecieServicio" ref="ecieServicio"></property>
+  <property name="valeServicio" ref="valeServicio"></property>
+ </bean>
+
+<!-- <bean id="solEntregaServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.SolEntrega"/>
+ </bean>
+ <bean id="recepcionServicio"  parent="commonService">
+  <property name="clazz" value="org.inventario.ecie.domain.Recepcion"/>
+ </bean>
+  -->
+
+ 
+ 
+
+</beans>

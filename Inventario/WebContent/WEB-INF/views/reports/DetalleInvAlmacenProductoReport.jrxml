@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetallesPlanMantenimientoReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="Logo" class="java.io.InputStream"/>
+	<field name="producto.nombre" class="java.lang.String"/>
+	<field name="almacen.nombre" class="java.lang.String"/>
+	<field name="producto.codigo" class="java.lang.String"/>
+	<field name="producto.clasificadorProducto.nombre" class="java.lang.String"/>
+	<field name="producto.unidad.nombre" class="java.lang.String"/>
+	<field name="fechaCambio" class="java.util.Date"/>
+	<field name="cantEntradaVale" class="java.lang.Double"/>
+	<field name="cantSalidaVale" class="java.lang.Double"/>
+	<field name="cantExist" class="java.lang.Double"/>
+	<field name="precioMNExist" class="java.lang.Double"/>
+	<field name="precioMLCExist" class="java.lang.Double"/>
+	<field name="impMNExist" class="java.lang.Double"/>
+	<field name="impMLCExist" class="java.lang.Double"/>
+	<field name="valeProducto.vale.noVale" class="java.lang.String"/>
+	<field name="valeProducto.vale.tipoVale" class="org.inventario.ecie.domain.TipoVale"/>
+	<field name="valeProducto.precioMNVale" class="java.lang.Double"/>
+	<field name="valeProducto.precioMLCVale" class="java.lang.Double"/>
+	<field name="valeProducto.importeMNVale" class="java.lang.Double"/>
+	<field name="valeProducto.importeMLCVale" class="java.lang.Double"/>
+	<group name="producto.clasificadorProducto.nombre">
+		<groupExpression><![CDATA[$F{almacen.nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="67" splitType="Stretch">
+				<staticText>
+					<reportElement x="176" y="43" width="376" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Tipo de intervención]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="20" y="4" width="432" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{planEquipo.equipo.tipoComponente.nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="43" width="139" height="20" backcolor="#ECE9D8"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Fecha]]></text>
+				</staticText>
+			</band>
+			<band height="50"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="22" splitType="Stretch">
+				<line direction="BottomUp">
+					<reportElement key="line" x="1" y="4" width="554" height="1" forecolor="#999999"/>
+				</line>
+			</band>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="152" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="28" width="172" height="26"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inventario Productos]]></text>
+			</staticText>
+			<image>
+				<reportElement mode="Transparent" x="27" y="12" width="117" height="32"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+			<line direction="BottomUp">
+				<reportElement key="line" x="1" y="147" width="554" height="1" forecolor="#999999"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="119" width="165" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="99" width="70" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Código:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="161" y="80" width="266" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{localizacionCupet.nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="79" width="158" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Nombre del Déposito:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="78" y="101" width="406" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{localizacionCupet.codigo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="91" y="121" width="393" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{localizacionCupet.direccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="105" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="177" y="2" width="367" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{intervencion.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="19" y="2" width="140" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="516" y="6" width="36" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="342" y="6" width="170" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

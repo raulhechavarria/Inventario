@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+   <bean id="tarjeteroDao" class="org.inventario.ecie.dao.support.TarjeteroDao" parent="commonDao"></bean>
+    <bean id="valeDao" class="org.inventario.ecie.dao.support.ValeDao" parent="commonDao"></bean>
+    <bean id="valeProductoDao" class="org.inventario.ecie.dao.support.ValeProductoDao" parent="commonDao"></bean>
+    <bean id="ecieDao" class="org.inventario.ecie.dao.support.EcieDao" parent="commonDao"></bean>
+    <bean id="productoDao" class="org.inventario.ecie.dao.support.ProductoDao" parent="commonDao"></bean>
+    <bean id="inventarioDao" class="org.inventario.ecie.dao.support.InventarioDao" parent="commonDao"></bean>
+</beans>

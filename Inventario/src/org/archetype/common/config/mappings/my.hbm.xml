@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.archetype.common.domain" default-lazy="false">
+
+  <class name="My" table="`Ecie`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Ecie`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_Ecie`" type="long" insert="false" update="false"/>
+  	<property name="nombre" column="`Nombre`" type="string" not-null="true"/>
+  	<property name="direccion" column="`Direccion`" type="string" not-null="true"/>
+  	<property name="reup" column="`REUP`" type="int" not-null="true"/>
+  	<property name="nit" column="`NIT`" type="int" not-null="true"/>
+  	<property name="agenciaMN" column="`Agencia_Mn`" type="int" not-null="true"/>
+  	<property name="resolDirectora" column="`Resol_Directora`" type="string" not-null="true"/>
+  	<property name="cuentaCuc" column="`Cuenta_Cuc`" type="int" not-null="true"/>
+  	<property name="tituloCtaCuc" column="`Titulo_Cta_Cuc`" type="string" not-null="true"/>
+  	<property name="cuentaCup" column="`Cuenta_Cup`" type="int" not-null="true"/>
+  	<property name="tituloCtaCup" column="`Titulo_Cta_Cup`" type="string" not-null="true"/>
+  	<property name="agenciaMlc" column="`Agencia_Mlc`" type="int" not-null="true"/>
+  	<property name="telefono" column="`Telefono`" type="int" not-null="true"/>
+  	<property name="fax" column="`Fax`" type="string"/>
+  	<property name="email" column="`Email`" type="string"/>
+    <property name="fechaOperacion" column="`FechaOperacion`" type="date"/>
+    <property name="noValeOperacional" column="`NoValeOperacional`" type="long" not-null="false"></property>
+    <property name="noValeRecepcionACiega" column="`NoValeRecepcionACiega`" type="long" not-null="false"></property>
+    <property name="noValeReclamacion" column="`NoValeReclamacion`" type="long" not-null="false"></property>
+    
+
+  </class>
+</hibernate-mapping>

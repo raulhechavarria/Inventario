@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="viewResolverReports" class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location" value="/WEB-INF/config/reports.xml"/>
+		<property name="order" value="1"/>
+	</bean>
+		
+	<bean id="viewResolverJSP" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="2"/>
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="WEB-INF/config/messages"/>
+		<property name="useCodeAsDefaultMessage" value="true"/>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1"/>		
+	</bean>
+
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessResourceFailureException">common/errorConnection</prop>
+				<prop key="org.springframework.transaction.CannotCreateTransactionException">common/errorConnection</prop>
+				<prop key="org.springframework.dao.DataAccessException">common/error</prop>				
+				<prop key="java.lang.RuntimeException">common/error</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- descomentar para utilizar webservices -->
+	<!--  
+	<bean id="handlerMappingCXF" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/common/services.htm">cxfController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="cxfController" class="org.springframework.web.servlet.mvc.ServletWrappingController">
+		<property name="servletClass" value="org.apache.cxf.transport.servlet.CXFServlet"/>
+	</bean>
+	 -->
+	 
+</beans>
