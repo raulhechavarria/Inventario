@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.archetype.common.domain" default-lazy="false">
+  <class name="Accion" table="`Accion`">
+	<id name="id" column="`Id_Accion`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+  	<property name="nombre" column="`Nombre`" type="string" not-null="true" unique="true"/>
+  	<property name="descripcion" column="`Descripcion`" type="string"/>
+	<set name="roles" table="`Accion_Rol`">
+  		<key column="`Id_Accion`"/>
+  		<many-to-many class="Rol" column="`Id_Rol`" lazy="proxy"/>
+  	</set>
+  	<many-to-one name="padre" class="Accion" column="`Id_Accion_Padre`" lazy="proxy" />
+  	<set name="hijos" inverse="true" table="`Accion`" cascade="all" lazy="true">
+  		<key column="`Id_Accion_Padre`"/>  		
+  		<one-to-many class="Accion"/>  		  		
+  	</set>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="Tarjetero" table="`Tarjetero`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Tarjetero`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+  	<version name="version" column="`Version`" type="timestamp" insert="true"/>
+    <property name="id" formula="`Id_Tarjetero`" type="long" insert="false" update="false"/>
+  	<property name="fechaCambio" column="`FechaCambio`" type="date" not-null="true"/>
+  	<property name="cantEntradaVale" column="`CantEntradaVale`" type="double" not-null="false"/>
+  	<property name="cantSalidaVale" column="`CantSalidaVale`" type="double" not-null="false"/>
+  	<property name="cantExist" column="`CantExist`" type="double" not-null="true"/>
+  	<property name="precioMNExist" column="`PrecioMNExist`" type="double" not-null="true"/>
+  	<property name="precioMLCExist" column="`PrecioMLCExist`" type="double" not-null="true"/>
+    <property name="impMNExist" column="`ImpMNExist`" type="double" not-null="true"/>
+  	<property name="impMLCExist" column="`ImpMLCExist`" type="double" not-null="true"/>
+    <many-to-one name="almacen" class="Almacen" column="`Id_Almacen`" lazy="proxy" not-null="true"/>
+    <many-to-one name="producto" class="Producto" column="`Id_Producto`" lazy="proxy" not-null="true"/>
+    <many-to-one name="valeProducto" class="ValeProducto" column="`Id_ValeProducto`" lazy="proxy" not-null="true"/>
+  </class>
+</hibernate-mapping>

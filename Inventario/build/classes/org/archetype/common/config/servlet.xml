@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="handlerMappingCommon" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/common/index.htm">urlFileName</prop>
+				<prop key="/common/start.htm">urlFileName</prop>
+				<prop key="/common/about.htm">urlFileName</prop>
+				<prop key="/common/expired.htm">urlFileName</prop>
+				<prop key="/common/accessDenied.htm">urlFileName</prop>
+				<prop key="/common/error.htm">urlFileName</prop>
+				<prop key="/common/errorConnection.htm">urlFileName</prop>
+				<prop key="/common/menu.htm">menuController</prop>
+				<prop key="/common/*Usuario.*">usuarioController</prop>
+				<prop key="/common/*Rol.*">rolNomencladorController</prop>
+				<prop key="/common/*Accion.*">accionController</prop>
+				<prop key="/common/*Audit.*">auditController</prop>
+				<prop key="/common/*Security.*">securityController</prop>
+				<prop key="/common/logout.htm">securityController</prop>
+				<prop key="/common/login.htm">securityController</prop>
+				<!-- <prop key="/common/listar*.*">myController</prop> 
+				<prop key="/common/services/**">cxfController</prop> -->
+			</props>
+		</property>
+	</bean>
+
+</beans>

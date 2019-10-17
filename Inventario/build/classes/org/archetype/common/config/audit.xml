@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<aop:aspectj-autoproxy/>
+	
+	<bean id="auditTrailManagementAspect" class="org.inspektr.audit.AuditTrailManagementAspect">																																														
+		<constructor-arg index="0" value="Archetype"/>
+		<constructor-arg index="1" ref="auditablePrincipalResolver" />
+		<constructor-arg index="2" ref="commonAuditTrailService" />
+		<constructor-arg index="3">
+			<map>
+				<entry key="DefaultAuditActionResolver" value-ref="defaultAuditActionResolver"/>
+			</map>
+		</constructor-arg>
+		<constructor-arg index="4">
+			<map>
+				<entry key="ParametersAsStringResourceResolver" value-ref="parametersAsStringResourceResolver"/>
+			</map>
+		</constructor-arg>
+   	</bean>
+
+	<bean id="defaultAuditActionResolver" class="org.inspektr.audit.spi.support.DefaultAuditActionResolver"/>
+	<bean id="parametersAsStringResourceResolver" class="org.inspektr.audit.spi.support.ParametersAsStringResourceResolver"/>
+	
+   	<bean id="auditablePrincipalResolver" class="org.inspektr.audit.spi.support.SpringSecurityAuditablePrincipalResolver"/>
+	
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${org.archetype.bd.driver}"/>
+		<property name="url" value="${org.archetype.bd.url}"/>
+  		<property name="username" value="${org.archetype.bd.usuario}"/>
+  		<property name="password" value="${org.archetype.bd.password}"/>
+  		<property name="initialSize" value="2"/>
+  		<property name="maxActive" value="5"/>
+		<property name="maxIdle" value="2"/>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" >
+  		<property name="mappingDirectoryLocations" value="classpath:org/**/**/**/config/mappings/"/>
+  		<property name="dataSource" ref="dataSource"/>
+  		<property name="hibernateProperties">
+    		<props>
+      			<prop key="hibernate.dialect">${org.archetype.bd.dialect}</prop>
+      			<prop key="hibernate.jdbc.batch_size">0</prop>
+      			<prop key="show_sql">true</prop>
+      			<!-- Drop and re-create the database schema on startup
+        		<prop key="hbm2ddl.auto">create</prop> -->
+	    	</props>
+  		</property>  		
+	</bean>
+	
+	<bean id="springHibernateSupport" class="org.archetype.common.dao.support.SpringHibernateSessionFactorySupport" abstract="true">
+		<property name="factory" ref="sessionFactory"/>
+	</bean>
+
+	<!-- habilita el uso de la anotacion @Transactional para el manejo de metodos de negocio transaccionales-->
+	<tx:annotation-driven transaction-manager="txManager"/>
+		
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+</beans>

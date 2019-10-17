@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.archetype.common.domain" default-lazy="false">
+  <class name="Rol" table="`Rol`" lazy="false">
+  	<id name="id" column="`Id_Rol`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+  	<property name="nombre" column="`Nombre`" type="string" not-null="true" unique="true"/>
+  	<property name="descripcion" column="`Descripcion`" type="string"/>
+  	<!-- El set que esta a continuacion es la relacion con los usuarios -->
+  	<!-- 
+  	<set name="usuario_roles" table="`Usuario_Rol`" lazy="true" inverse="true" cascade="all,delete-orphan">
+  		<key column="`Id_Rol`"/>
+  		<one-to-many class="Usuario_Rol"/>
+  	</set>
+  	 -->
+  </class>
+</hibernate-mapping>

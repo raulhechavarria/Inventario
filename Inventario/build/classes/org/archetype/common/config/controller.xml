@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="urlFileName" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+	 
+	<bean id="logoImage" class="org.springframework.web.context.support.ServletContextResource" autowire="constructor">
+		<constructor-arg index="1" value="/img/common/logo.png"/>
+	</bean>
+	<!-- 
+	<bean id="myController" class="org.archetype.common.web.controllers.MyController">
+		<property name="servicio" ref="myService"/>
+		<property name="nomenclador" value="Rol"/>
+		<property name="modulo" value="common"/>
+		<property name="methodNameResolver" ref="myMethodResolver"/>
+	</bean>
+	 -->
+	<bean id="myMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/**/adicionar**.htm">guardar</prop>
+				<prop key="/**/detalles**.htm">detalles</prop>
+				<prop key="/**/editar**.htm">editar</prop>
+				<prop key="/**/eliminar**.htm">eliminar</prop>
+				<prop key="/**/imprimir**.htm">imprimir</prop>
+				<prop key="/**/listar**.htm">mostrarLista</prop>
+				<prop key="/**/listar**.json">listar</prop>
+				<prop key="/**/buscar**.htm">buscar</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="commonController" class="org.archetype.common.web.controllers.CommonController" abstract="true">
+		<property name="detallesView"  value="common/detail/detallesNomenclador"/>
+		<property name="editarView"    value="common/edit/editarNomenclador"/>
+		<property name="listarView"    value="common/list/listarNomenclador"/>
+		<property name="buscarView"    value="common/search/buscarNomenclador"/>
+		<property name="imprimirView" value="NomencladorReport"/>
+		<property name="logo" ref="logoImage"/>
+		<property name="methodNameResolver" ref="commonMethodResolver"/>
+		<property name="validator" ref="nomencladorValidator"/>
+	</bean>
+			
+	<!-- nomenclador method name resolver -->
+	
+	<bean id="commonMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/**/adicionar**.htm">guardar</prop>
+				<prop key="/**/detalles**.htm">detalles</prop>
+				<prop key="/**/editar**.htm">editar</prop>
+				<prop key="/**/eliminar**.htm">eliminar</prop>
+				<prop key="/**/imprimir**.htm">imprimir</prop>
+				<prop key="/**/listar**.htm">mostrarLista</prop>
+				<prop key="/**/listar**.json">listar</prop>
+				<prop key="/**/buscar**.htm">buscar</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="nomencladorValidator" class="org.archetype.common.web.validators.NomencladorValidator"/>
+		
+	<bean id="auditController" class="org.archetype.common.web.controllers.AuditController">
+		<property name="servicio" ref="auditService"/>
+		<property name="listarView" value="common/list/listarAudit"/>
+		<property name="detallesView" value="common/detail/detallesAudit"/>
+		<property name="methodNameResolver" ref="auditMethodResolver"/>
+	</bean>
+	
+	<bean id="auditMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/**/detalles**.htm">detalles</prop>
+				<prop key="/**/listar**.htm">mostrarLista</prop>
+				<prop key="/**/listar**.json">listar</prop>				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="menuController" class="org.archetype.common.web.controllers.MenuController">
+		<property name="menuJSON" ref="menuJSON"/>
+		<property name="checkAccess" ref="checkUserAccessToUrl"/>
+	</bean>
+	
+	<bean id="usuarioValidator" class="org.archetype.common.web.validators.UsuarioValidator"/>
+		
+	<bean id="usuarioController" class="org.archetype.common.web.controllers.UsuarioController" parent="commonController">
+		<property name="listarView" value="/common/list/listarUsuario"/>
+		<property name="editarView" value="/common/edit/editarUsuario"/>
+		<property name="servicio" ref="usuarioService"/>
+		<property name="validator" ref="usuarioValidator"/>
+		<property name="encoder"   ref="passwordEncoder"/>
+		<property name="rolServicio" ref="rolService"/>
+	</bean>
+	
+	<bean id="rolNomencladorController" parent="commonController">
+		<property name="servicio" ref="rolService"/>
+		<property name="nomenclador" value="Rol"/>
+		<property name="modulo" value="common"/>
+		<property name="autoList" value="True"/>
+	    <property name="autoEdit" value="True"/>
+	    <property name="autoSearch" value="True"/>
+	</bean>
+	
+	<bean id="accionController" class="org.archetype.common.web.controllers.AccionController" parent="commonController">
+		<property name="servicio" ref="accionService"/>
+		<property name="rolServicio" ref="rolService"/>
+		<property name="nomenclador" value="Accion"/>
+		<property name="listarView" value="/common/list/listarNomenclador"/>
+		<property name="editarView" value="/common/edit/editarAccion"/>
+		<property name="autoList" value="True"/>
+	    <property name="autoSearch" value="True"/>
+		<property name="modulo" value="common"/>
+	</bean>
+	
+	<bean id="securityController" class="org.archetype.common.web.controllers.SecurityController" init-method="init">
+		<property name="listarView" value="common/list/listarSecurity"/>
+		<property name="loginView" value="common/login"/>
+		<property name="logoutView" value="login.htm"/>
+		<property name="sessionRegistry" ref="sessionRegistry"/>
+		<property name="methodNameResolver" ref="securityMethodNameResolver"/>
+		<property name="defaultUrl" value="../common/index.htm"/>
+		<property name="updater" ref="sessionUpdater"/>
+	</bean>
+	
+	<bean id="securityMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/common/login.htm">login</prop>
+				<prop key="/common/logout.htm">logout</prop>
+				<prop key="/common/listarSecurity.htm">mostrarLista</prop>
+				<prop key="/common/listarSecurity.json">listar</prop>
+				<prop key="/common/desconectarSecurity.json">desconectarSecurity</prop>
+				<prop key="/common/checkOpenSecurity.htm">checkOpen</prop>
+				<prop key="/common/checkCloseSecurity.htm">checkClose</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

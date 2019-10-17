@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="ValeProducto" table="`ValeProducto`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_ValeProducto`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_ValeProducto`" type="long" insert="false" update="false"/>
+  	<property name="cantProdVale" column="`CantProdVale`" type="double" not-null="true"/>
+  	<property name="precioMNVale" column="`PrecioMNVale`" type="double" not-null="false"/>
+  	<property name="importeMNVale" column="`ImporteMNVale`" type="double" not-null="false"/>
+  	<property name="precioMLCVale" column="`PrecioMLCVale`" type="double" not-null="false"/>
+  	<property name="importeMLCVale" column="`ImporteMLCVale`" type="double" not-null="false"/>
+  	<property name="recargoDescuentoMN" column="`RecargoDescuentoMN`" type="double" not-null="false"/>
+  	<property name="recargoDescuentoMLC" column="`RecargoDescuentoMLC`" type="double" not-null="false"/>
+  	<property name="totalMN" column="`TotalMN`" type="double" not-null="false"/>
+  	<property name="totalMLC" column="`TotalMLC`" type="double" not-null="false"/>
+  	<property name="existenciaOrigen" column="`ExistenciaOrigen`" type="double" not-null="false"/>
+  	<property name="existenciaDestino" column="`ExistenciaDestino`" type="double" not-null="false"/>
+
+    <many-to-one name="producto" class="Producto" column="`Id_Producto`" lazy="proxy" not-null="true"/>
+    <many-to-one name="vale" class="Vale" column="`Id_Vale`" lazy="proxy" not-null="true"/>
+
+  </class>
+</hibernate-mapping>

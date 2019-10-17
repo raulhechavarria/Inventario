@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="urlFileName"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+
+	<bean id="productoController" parent="commonController"
+		class="org.inventario.ecie.web.controllers.ProductoController">
+		<property name="servicio" ref="productoServicio" />
+		<property name="listarView" value="/ecie/list/listarProducto" />
+		<property name="editarView" value="/ecie/edit/editarProducto" />
+		<property name="imprimirView" value="ProductoReport" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/listar*.htm">mostrarLista</prop>
+						<prop key="/**/listarProducto.json">listar</prop>
+						<prop key="/**/listProducto.json">listarProducto</prop>
+						<prop key="/**/adicionar**.htm">guardar</prop>
+						<prop key="/**/detalles**.htm">detalles</prop>
+						<prop key="/**/editar**.htm">editar</prop>
+						<prop key="/**/imprimir**.htm">imprimir</prop>
+						<prop key="/**/imprimirDetalles**.htm">imprimirDetalles</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="almacenController" parent="commonController">
+		<property name="servicio" ref="almacenServicio" />
+		<property name="listarView" value="/ecie/list/listarAlmacen" />
+		<property name="editarView" value="/ecie/edit/editarAlmacen" />
+		<property name="detallesView" value="/ecie/detail/detallesAlmacen" />
+		<property name="imprimirView" value="AlmacenReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+	
+	<bean id="unidadMedidaController" parent="commonController">
+		<property name="servicio" ref="unidadMedidaServicio" />
+		<property name="listarView" value="/ecie/list/listarUnidadMedida" />
+		<property name="editarView" value="/ecie/edit/editarUnidadMedida" />
+		<property name="imprimirView" value="UnidadMedidaReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+
+	<bean id="organismoController" parent="commonController">
+		<property name="servicio" ref="organismoServicio" />
+		<property name="listarView" value="/ecie/list/listarOrganismo" />
+		<property name="editarView" value="/ecie/edit/editarOrganismo" />
+		<property name="imprimirView" value="OrganismoReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+
+	<bean id="empresaController" parent="commonController" class="org.inventario.ecie.web.controllers.EmpresaController">
+		<property name="servicio" ref="empresaServicio" />
+		<property name="listarView" value="/ecie/list/listarEmpresa" />
+		<property name="editarView" value="/ecie/edit/editarEmpresa" />
+		<property name="detallesView" value="/ecie/detail/detallesEmpresa" />
+		<property name="logo" ref="logoImage" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/listarEmpresa.htm">mostrarLista</prop>
+						<prop key="/**/listarEmpresa.json">listar</prop>
+						<prop key="/**/adicionar**.htm">guardar</prop>
+						<prop key="/**/detalles**.htm">detalles</prop>
+						<prop key="/**/editar**.htm">editar</prop>
+						<prop key="/**/imprimirEmpresa**.htm">imprimir</prop>
+						<prop key="/**/impDetallesEmpresa**.htm">imprimirDetalles</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="ecieController" parent="commonController"
+		class="org.inventario.ecie.web.controllers.EcieController">
+		<property name="servicio" ref="ecieServicio" />
+		<property name="listarView" value="/ecie/list/listarEcie" />
+		<property name="editarView" value="/ecie/edit/editarEcie" />
+		<property name="detallesView" value="/ecie/detail/detallesEcie" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/listarEcie.htm">mostrarLista</prop>
+						<prop key="/**/listarEcie.json">listar</prop>
+						<prop key="/**/adicionar**.htm">guardarEcie</prop>
+						<prop key="/**/detalles**.htm">detalles</prop>
+						<prop key="/**/editar**.htm">editar</prop>
+						<prop key="/**/imprimir**.htm">imprimir</prop>
+						<prop key="/**/impDetalles**.htm">imprimirDetalles</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="establecimientoEcieController" parent="commonController">
+		<property name="servicio" ref="establecimientoEcieServicio" />
+		<property name="listarView" value="/ecie/list/listarEstablecimiento" />
+		<property name="editarView" value="/ecie/edit/editarEstablecimiento" />
+		<property name="imprimirView" value="EstablecimientoReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+	<bean id="responsableController" parent="commonController">
+		<property name="servicio" ref="responsableServicio" />
+		<property name="listarView" value="/ecie/list/listarResponsable" />
+		<property name="editarView" value="/ecie/edit/editarResponsable" />
+		<property name="imprimirView" value="ResponsableReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+	<bean id="clasificadorProductoController" parent="commonController">
+		<property name="servicio" ref="clasificadorProductoServicio" />
+		<property name="listarView" value="/ecie/list/listarClasificador" />
+		<property name="editarView" value="/ecie/edit/editarClasificador" />
+		<property name="imprimirView" value="ClasificadorReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+	<bean id="tarjeteroController" class="org.inventario.ecie.web.controllers.TarjeteroController"
+		parent="commonController">
+		<property name="servicio" ref="tarjeteroServicio" />
+		<property name="ecieServicio" ref="ecieServicio" />
+		<property name="listarView" value="" />
+		<property name="listarTarjeteroView" value="/ecie/list/listarTarjetero" />
+		<property name="listarExistenciaView" value="/ecie/list/listarExistencia" />
+		<property name="editarView" value="/ecie/edit/editarTarjetero" />
+		<property name="detallesExistenciaView" value="/ecie/detail/detallesExistencia" />
+		<property name="detallesTarjeteroView" value="/ecie/detail/detallesTarjetero" />
+		<property name="rangoTarjeteroView" value="ecie/detail/rangoTarjetero" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/adicionar**.htm">adicionarTarjetero</prop>
+						<prop key="/**/editar.htm">editar</prop>
+						<prop key="/**/buscar**">buscar</prop>
+						<prop key="/**/detallesTarjetero.htm">detallesTarjetero</prop>
+						<prop key="/**/detallesExistencia.htm">detallesExistencia</prop>
+						<prop key="/**/editar**.htm">editar</prop>
+						<prop key="/**/cerrar**.htm">cerrar</prop>
+						<prop key="/**/eliminar**.htm">eliminar</prop>
+						<prop key="/ecie/listarTarjetero.json">listarTarjetero</prop>
+						<prop key="/ecie/listarExistencia.json">listarExistencia</prop>
+						<prop key="/ecie/adicionarTarjetero.htm">adicionarTarjetero</prop>
+						<prop key="/**/listarTarjetero.htm">mostrarListaTarjetero</prop>
+						<prop key="/**/listarExistencia.htm">mostrarListaExistencia</prop>
+						<prop key="/**/imprimirDetalles**.htm">imprimirDetalles</prop>
+						<prop key="/**/impTarjeteroOciosos**.htm">imprimirOciosos</prop>
+						<prop key="/**/impTarjeteroExistencia**.htm">imprimirExistencia</prop>
+						<prop key="/**/impTarjeteroFamilia**.htm">imprimirExistenciaFamilia</prop>
+						<prop key="/**/imprimirTarjetero.htm">imprimirTarjetero</prop>
+						<prop key="/**/rangoTarjetero.htm">rangoTarjetero</prop>
+						<prop key="/**/rangoReporteTarjetero.htm">rangoReporteTarjetero</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="valeController" class="org.inventario.ecie.web.controllers.ValeController"
+		parent="commonController">
+		<property name="servicio" ref="valeServicio" />
+		<property name="tarjeteroServicio" ref="tarjeteroServicio" />
+		<property name="ecieServicio" ref="ecieServicio" />
+
+		<property name="listarFacturaMNView" value="/ecie/list/listarFacturaMN" />
+		<property name="editarFacturaMNView" value="/ecie/edit/editarFacturaMN" />
+		<property name="detallesFacturaMNView" value="/ecie/detail/detallesFacturaMN" />
+
+		<property name="listarFacturaMLCView" value="/ecie/list/listarFacturaMLC" />
+		<property name="editarFacturaMLCView" value="/ecie/edit/editarFacturaMLC" />
+		<property name="detallesFacturaMLCView" value="/ecie/detail/detallesFacturaMLC" />
+
+		<property name="listarFactura_MN_MLCView" value="/ecie/list/listarFactura_MN_MLC" />
+		<property name="editarFactura_MN_MLCView" value="/ecie/edit/editarFactura_MN_MLC" />
+		<property name="detallesFactura_MN_MLCView" value="/ecie/detail/detallesFactura_MN_MLC" />
+
+		<property name="listarDevolucionView" value="/ecie/list/listarDevolucion" />
+		<property name="editarDevolucionView" value="/ecie/edit/editarDevolucion" />
+		<property name="detallesDevolucionView" value="/ecie/detail/detallesDevolucion" />
+
+		<property name="listarRecepcionACiegasView" value="/ecie/list/listarRecepcionACiegas" />
+		<property name="editarRecepcionACiegasView" value="/ecie/edit/editarRecepcionACiegas" />
+		<property name="detallesRecepcionACiegasView" value="/ecie/detail/detallesRecepcionACiegas" />
+
+		<property name="listarRecepcionView" value="/ecie/list/listarRecepcion" />
+		<property name="editarRecepcionView" value="/ecie/edit/editarRecepcion" />
+		<property name="detallesRecepcionView" value="/ecie/detail/detallesRecepcion" />
+
+		<property name="listarCargaInicialView" value="/ecie/list/listarCargaInicial" />
+		<property name="detallesCargaInicialView" value="/ecie/detail/detallesCargaInicial" />
+		<property name="editarCargaInicialView" value="/ecie/edit/editarCargaInicial" />
+
+		<property name="listarSolicitudEntregaView" value="/ecie/list/listarSolicitudEntrega" />
+		<property name="editarSolicitudEntregaView" value="/ecie/edit/editarSolicitudEntrega" />
+		<property name="detallesSolicitudEntregaView" value="/ecie/detail/detallesSolicitudEntrega" />
+
+		<property name="listarEntradaPorAjusteView" value="/ecie/list/listarEntradaPorAjuste" />
+		<property name="editarEntradaPorAjustView" value="/ecie/edit/editarEntradaPorAjuste" />
+		<property name="detallesEntradaPorAjustView" value="/ecie/detail/detallesEntradaPorAjuste" />
+
+		<property name="listarSalidaPorAjusteView" value="/ecie/list/listarSalidaPorAjuste" />
+		<property name="editarSalidaPorAjusteView" value="/ecie/edit/editarSalidaPorAjuste" />
+		<property name="detallesSalidaPorAjusteView" value="/ecie/detail/detallesSalidaPorAjuste" />
+
+		<property name="listarTransferenciaEntreAlmacenesView" value="/ecie/list/listarTransEntreAlmacenes" />
+		<property name="editarTransferenciaEntreAlmacenesView" value="/ecie/edit/editarTransEntreAlmacenes" />
+		<property name="detallesTransEntreAlmacenesView" value="/ecie/detail/detallesTransEntreAlmacenes" />
+
+		<property name="listarTransferenciaEntradaView" value="/ecie/list/listarTransEntrada" />
+		<property name="editarTransferenciaEntradaView" value="/ecie/edit/editarTransEntrada" />
+		<property name="detallesTransferenciaEntradaView" value="/ecie/detail/detallesTransEntrada" />
+
+		<property name="listarTransferenciaSalidaView" value="/ecie/list/listarTransSalida" />
+		<property name="editarTransferenciaSalidaView" value="/ecie/edit/editarTransSalida" />
+		<property name="detallesTransferenciaSalidaView" value="/ecie/detail/detallesTransSalida" />
+		
+		<property name="listarReclamacionView" value="/ecie/list/listarReclamacion" />
+		<property name="editarReclamacionView" value="/ecie/edit/editarReclamacion" />
+		<property name="detallesReclamacionView" value="/ecie/detail/detallesReclamacion" />
+
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/ecie/adicionarVale.htm">adicionarVale</prop>
+						<prop key="/**/add**.htm">guardarVale</prop>
+						<prop key="/**/listFechas.json">listarFecha</prop>
+						<prop key="/**/adicionRecepcionACiegas.htm">guardarRecepcionACiegas</prop>
+
+						<prop key="/**/buscar**">buscar</prop>
+						<prop key="/**/cerrar**.htm">cerrar</prop>
+						<prop key="/**/eliminar**.htm">eliminar</prop>
+						<prop key="/**/listar*.htm">mostrarLista</prop>
+						<prop key="/**/listar*.json">listar</prop>
+						<prop key="/**/editar*.htm">editar</prop>
+						<prop key="/**/listaSoliEnt.json">listarSoliAnno</prop>
+						<prop key="/**/detallesFacturaMN.htm">detallesFacturaMN</prop>
+						<prop key="/**/detallesFacturaMLC.htm">detallesFacturaMLC</prop>
+						<prop key="/**/detallesFactura_MN_MLC.htm">detallesFactura_MN_MLC</prop>
+						<prop key="/**/detallesRecepcionACiegas.htm">detallesRecepcionACiega</prop>						
+						<prop key="/**/detallesDevolucion.htm">detallesDevolucion</prop>						
+						<prop key="/**/detallesReclamacion.htm">detallesReclamacion</prop>						
+						<prop key="/**/detallesRecepcion.htm">detallesRecepcion</prop>
+						<prop key="/**/detallesSolicitudEntrega.htm">detallesSolicitudEntrega</prop>										
+						<prop key="/**/detallesEntradaPorAjuste.htm">detallesEntradaPorAjuste</prop>						
+						<prop key="/**/detallesSalidaPorAjuste.htm">detallesSalidaPorAjuste</prop>
+						<prop key="/**/detallesTransEntreAlmacenes.htm">detallesTransEntreAlmacenes</prop>						
+						<prop key="/**/detallesTransEntrada.htm">detallesTransferenciaEntrada</prop>						
+						<prop key="/**/detallesTransSalida.htm">detallesTransferenciaSalida</prop>						
+						<prop key="/ecie/detallesCargaInicial.htm">detallesCargaInicial</prop>						
+						<prop key="/**/imprimirDetalles**.htm">imprimirDetalles</prop>
+						<prop key="/**/RaCConfirmar**.htm">confirmarRecepcionACiegaVale</prop>
+						<prop key="/**/confirmar**.htm">confirmarVale</prop>
+						<prop key="/**/confirReclamacion**.htm">confirmarReclamacion</prop>
+						<prop key="/**/Reclamacion**.htm">reclamacion</prop>
+						<prop key="/**/impDetalles**.htm">impDetalles</prop>
+						<prop key="/**/imprimir**.htm">imprimir</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="centroCostoController" parent="commonController">
+		<property name="servicio" ref="centroCostoServicio" />
+		<property name="listarView" value="/ecie/list/listarCentroCosto" />
+		<property name="editarView" value="/ecie/edit/editarCentroCosto" />
+		<property name="imprimirView" value="CentroCostoReport" />
+		<property name="logo" ref="logoImage" />
+	</bean>
+
+	<bean id="valeProductoController"
+		class="org.inventario.ecie.web.controllers.ValeProductoController"
+		parent="commonController">
+		<property name="servicio" ref="valeProductoServicio" />
+		<property name="listarView" value="/ecie/list/" />
+		<property name="editarEntradaValeProducto" value="/ecie/edit/editarEntradaValeProducto" />
+		<property name="editarSalidaValeProducto" value="/ecie/edit/editarSalidaValeProducto" />
+		<property name="editarDevolValeProducto" value="/ecie/edit/editarDevolValeProducto" />
+		<property name="imprimirView" value="CentroCostoReport" />
+		<property name="logo" ref="logoImage" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/editarEntradaValeProducto.htm">editarValeProductoEntrada</prop>
+						<prop key="/**/editarSalidaValeProducto.htm">editarValeProductoSalida</prop>
+						<prop key="/**/delete**.htm">eliminarValeProducto</prop>
+						<prop key="/ecie/listarValeProducto.json">listarValeProducto</prop>
+						<prop key="/ecie/adicion**.htm">guardarValeProducto</prop>
+						<prop key="/ecie/editarDevolValeProducto.htm">editarDevolValeProductos</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="inventarioController" parent="commonController" class="org.inventario.ecie.web.controllers.InventarioController">
+		<property name="servicio" ref="inventarioServicio" />
+		<property name="ecieServicio" ref="ecieServicio" />
+		<property name="valeServicio" ref="valeServicio" /> 
+	    <property name="listarView" value="/ecie/list/listarInventario" />
+		<property name="editarView" value="/ecie/edit/editarInventario" />
+		<property name="logo" ref="logoImage" />
+		<property name="methodNameResolver">
+			<bean
+				class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/**/listar*.htm">mostrarLista</prop>
+						<prop key="/**/listarInventario.json">listar</prop>
+						<prop key="/**/InventarioCompras.json">compras</prop>
+						<prop key="/**/InventarioESMes.json">entradaSalidaMes</prop>
+						<prop key="/**/InventarioESDiario.json">entradaSalidaDiario</prop>
+						<prop key="/**/detalles**.htm">detalles</prop>
+						<prop key="/**/imprimir**.htm">imprimirDetalles</prop>
+						<prop key="/**/imprimirDetalles**.htm">imprimir</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+  <class name="Inventario" table="`Inventario`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Inventario`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_Inventario`" type="long" insert="false" update="false"/>
+  	<property name="fecha" column="`Fecha`" type="date" not-null="true"/>
+  	<property name="invFinalMN" column="`InvFinalMN`" type="double" not-null="true"/>
+  	<property name="invFinalMLC" column="`InvFinalMLC`" type="double" not-null="true"/>
+    <many-to-one name="almacen" class="Almacen" column="`Id_Almacen`" lazy="proxy" not-null="true"/>
+  </class>
+</hibernate-mapping>

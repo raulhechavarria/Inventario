@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+	<typedef name="OperacionFactura"
+		class="org.archetype.common.domain.EnumHibernateType">
+		<param name="enumClassName">org.inventario.ecie.domain.OperacionFactura</param>
+	</typedef>
+	<typedef name="ConceptoAjuste"
+		class="org.archetype.common.domain.EnumHibernateType">
+		<param name="enumClassName">org.inventario.ecie.domain.ConceptoAjuste</param>
+	</typedef>	
+	<typedef name="TipoVale"
+		class="org.archetype.common.domain.EnumHibernateType">
+		<param name="enumClassName">org.inventario.ecie.domain.TipoVale</param>
+	</typedef>
+	<typedef name="EstadoVale"
+		class="org.archetype.common.domain.EnumHibernateType">
+		<param name="enumClassName">org.inventario.ecie.domain.EstadoVale</param>
+	</typedef>
+
+  <class name="Vale" table="`Vale`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Vale`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_Vale`" type="long" insert="false" update="false"/>
+    <property name="fechaVale" column="`FechaVale`" type="date" not-null="true"/>
+    <property name="noVale" column="`NoVale`" type="string" not-null="true"/>
+  	<property name="noControl" column="`NoControl`" type="string" not-null="true"/>
+  	<property name="comentario" column="`Comentario`" type="string"/>
+    <property name="totalMN" column="`TotalMN`" type="double" not-null="false"/>
+    <property name="TotalMLC" column="`TotalMLC`" type="double" not-null="false"/>
+    <property name="recargoDescuentoMN" column="`RecargoDescuentoMN`" type="double"/>
+    <property name="recargoDescuentoMLC" column="`RecargoDescuentoMLC`" type="double"/>
+    <property name="serviciosMN" column="`ServiciosMN`" type="double"/>
+    <property name="serviciosMLC" column="`ServiciosMLC`" type="double"/>
+    <property name="importeNeto" column="`ImporteNeto`" type="double" />
+    <property name="importeMLC" column="`ImporteMLC`" type="double" />
+    <property name="importeMN" column="`ImporteMN`" type="double" />
+  	<property name="fchResponsAutoriza" column="`FchResponsAutoriza`" type="date"/>
+  	<property name="fchSolicElab" column="`FchSolicElab`" type="date"/>
+  	<property name="fchRecibido" column="`FchRecibido`" type="date"/>
+  	<property name="noDoc" column="`NoDoc`" type="string" not-null="false"/>
+  	<property name="nombreDoc" column="`NombreDoc`" type="string" not-null="false"/>
+  	<property name="nombreTransportador" column="`NombreTransportador`" type="string" not-null="false"/>
+  	<property name="cITransportador" column="`CITransportador`" type="string" not-null="false"/>
+  	<property name="noTransporte" column="`NoTransporte`" type="string" not-null="false"/>
+	<property name="noOrden" column="`NoOrden`" type="string" not-null="false"/>
+	<property name="noSolicitud" column="`NoSolicitud`" type="string" not-null="false"/>
+  	<property name="operacionFactura" column="`OperacionFactura`" type="OperacionFactura" not-null="false"/>
+  	<property name="conceptoAjuste" column="`ConceptoAjuste`" type="ConceptoAjuste" not-null="false"/>
+  	<property name="tipoVale" column="`TipoVale`" type="TipoVale" not-null="true"/>
+  	<property name="estadoVale" column="`EstadoVale`" type="EstadoVale" not-null="false"/>
+  	<property name="receptor" column="`Receptor`" type="string" not-null="false"/>
+    <many-to-one name="responsAutoriza" class="Responsable" column="`Id_ResponsAutoriza`" lazy="proxy"/>
+    <many-to-one name="solicElab" class="Responsable" column="`Id_SolicElab`" lazy="proxy"/>
+    <many-to-one name="recibido" class="Responsable" column="`Id_Recibido`" lazy="proxy"/>
+    <many-to-one name="almacenOrigen" class="Almacen" column="`Id_AlmacenOrigen`" lazy="proxy" not-null="false"/>
+    <many-to-one name="empresa" class="Empresa" column="`Id_Empresa`" lazy="proxy" not-null="false"/>
+    <many-to-one name="almacenDestino" class="Almacen" column="`Id_AlmacenDestino`" lazy="proxy" not-null="false"/>
+    <many-to-one name="centroCosto" class="CentroCosto" column="`Id_CentroCosto`" lazy="proxy" not-null="false"/>
+    <set name="valeProducto" inverse="true" cascade="all" lazy="true">
+		<key column="`Id_Vale`" not-null="true"/>
+		<one-to-many class="ValeProducto"/>
+	</set>
+  </class>
+</hibernate-mapping>

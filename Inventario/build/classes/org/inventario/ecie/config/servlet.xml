@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+  <property name="mappings">
+   <props>   
+    <prop key="/ecie/*Recepcion*">valeController</prop>
+    <prop key="/ecie/*SolicitudEntrega*">valeController</prop>
+    <prop key="/ecie/*Devolucion*">valeController</prop>
+    <prop key="/ecie/*Reclamacion*">valeController</prop>
+    <prop key="/ecie/*EntradaPorAjuste*">valeController</prop>
+    <prop key="/ecie/*SalidaPorAjuste*">valeController</prop>
+    <prop key="/ecie/*RecepcionACiegas*">valeController</prop>
+    <prop key="/ecie/*TransEntreAlmacenes*">valeController</prop>
+    <prop key="/ecie/*CargaInicial*">valeController</prop>
+    <prop key="/ecie/*TransEntrada*">valeController</prop>
+    <prop key="/ecie/*TransSalida*">valeController</prop>
+    <prop key="/ecie/*Fechas*">valeController</prop>  
+    <prop key="/ecie/*RaCConfirmar*">valeController</prop>
+  	<prop key="/ecie/*TransExterna*">valeController</prop>
+  	<prop key="/ecie/*Factura*">valeController</prop>
+    <prop key="/ecie/*ValeProducto*">valeProductoController</prop>      
+    <prop key="/ecie/*CentroCosto*">centroCostoController</prop>
+    <prop key="/ecie/*Producto*">productoController</prop>
+    <prop key="/ecie/*Almacen.*">almacenController</prop> 
+    <prop key="/ecie/*UnidadMedida*">unidadMedidaController</prop>
+    <prop key="/ecie/*Organismo*">organismoController</prop>
+    <prop key="/ecie/*Empresa*">empresaController</prop>
+    <prop key="/ecie/*Ecie*">ecieController</prop>
+    <prop key="/ecie/*Establecimiento*">establecimientoEcieController</prop>
+    <prop key="/ecie/*Responsable*">responsableController</prop>
+    <prop key="/ecie/*Clasificador*">clasificadorProductoController</prop>
+    <prop key="/ecie/*Tarjetero*">tarjeteroController</prop>
+    <prop key="/ecie/*Existencia*">tarjeteroController</prop>
+    <prop key="/ecie/*Inventario*">inventarioController</prop>
+    <prop key="/ecie/*SoliEnt*">valeController</prop>
+   </props> 
+  </property>
+ </bean>
+
+</beans>

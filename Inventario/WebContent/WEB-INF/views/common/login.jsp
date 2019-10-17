@@ -9,7 +9,7 @@
 <body>
 <form action="../j_spring_security_check" method="post">
 	<div align="justify" >
-<div style="width: 1000px;height: 555px; background:transparent url(../img/common/authBackground.png)">
+<div style="width: 1000px;height: 555px; background:transparent url(../img/common/authB1ackground.png)">
 		<div style="padding-top: 15px"></div>
 		<div align="center" style="width: 300px;height: 150px;"></div> 
 		<div style="padding-top:70px"></div>

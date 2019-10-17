@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="commonService" class="org.archetype.common.business.support.CommonService" abstract="true">
+		<property name="dao" ref="commonDao"/>
+	</bean>
+	
+	<bean id="commonAuditTrailService" class="org.archetype.common.business.support.CommonAuditTrailService">
+    	<property name="dao" ref="commonDao"/>
+  	</bean>
+  	
+	<bean id="rolService" parent="commonService">
+		<property name="clazz" value="org.archetype.common.domain.Rol"/>
+	</bean>
+	
+	<bean id="myService" parent="commonService">
+		<property name="dao" ref="commonDao"/>
+		<property name="clazz" value="org.archetype.common.domain.My"/>
+	</bean>
+	
+	<bean id="usuarioService" class="org.archetype.common.business.support.UsuarioService">
+		<property name="dao" ref="usuarioDao"/>
+		<property name="clazz" value="org.archetype.common.domain.Usuario"/>
+	</bean>
+	
+	<bean id="auditService" class="org.archetype.common.business.support.CommonService">
+		<property name="clazz" value="org.archetype.common.domain.AuditTrailLog"/>
+		<property name="dao" ref="commonDao"/>
+	</bean>
+	
+	<bean id="accionService" class="org.archetype.common.business.support.AccionService" parent="commonService" depends-on="accessDefinitionSource">
+		<property name="clazz" value="org.archetype.common.domain.Accion"/>
+		<property name="securityConfig" ref="accessDefinitionSource"/>
+	</bean>
+	
+</beans>

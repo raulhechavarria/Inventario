@@ -22,7 +22,7 @@
 		autoScroll: true,
 		bodyStyle: 'padding:10px 10px 0',
 		layout: 'fit',       
-		html: '<div id="acercaD" style="padding:10px"><P> Equipo de Trabajo<br><hr>Iany Calderin..............................Jefe de Proyecto<br>Maria Luisa Luarca........................Analista<br>Jesús M. Fernández......................Programador<br>Lanny Rivero..............................Programador<br>Yeilyn Abad................................Programador<br>Belkis Cabrera.............................Programador<br>Raul Hechavarria..........................Programador<br></hr></P></div>'
+		html: '<div id="acercaD" style="padding:10px"><P> Equipo de Trabajo<br><hr>Raul Hechavarria..........................Programador<br></hr></P></div>'
 		});
 		
 		var licencia = new Ext.Panel({

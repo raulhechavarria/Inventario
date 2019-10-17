@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="seguridaDao" class="org.archetype.common.dao.support.SeguridadDaoImpl" parent="springHibernateSupport"/>
+	
+	<bean id="commonDao" class="org.archetype.common.dao.support.CommonDao" parent="springHibernateSupport"/>
+
+	<bean id="usuarioDao" class="org.archetype.common.dao.support.UsuarioDao" parent="springHibernateSupport"/>
+</beans>

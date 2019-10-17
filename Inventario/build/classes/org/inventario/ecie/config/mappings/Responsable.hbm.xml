@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.inventario.ecie.domain" default-lazy="false">
+
+  <class name="Responsable" table="`Responsable`" lazy="false" dynamic-update="true">
+  	<id name="id" column="`Id_Responsable`" type="long">
+  		<generator class="hilo">
+		</generator>
+  	</id>
+    <property name="id" formula="`Id_Responsable`" type="long" insert="false" update="false"/>
+  	<property name="nombre" column="`NombreResponsable`" type="string" not-null="true"/>
+  	<property name="apellido1" column="`Apellido1Responsable`" type="string" not-null="true"/>
+  	<property name="apellido2" column="`Apellido2Responsable`" type="string" not-null="true"/>
+  	<property name="descripcion" column="`Descripcion`" type="string"/>
+  	<property name="carnetIdentidad" column="`CarnetIdentidad`" type="string"/>
+  	
+  </class>
+</hibernate-mapping>

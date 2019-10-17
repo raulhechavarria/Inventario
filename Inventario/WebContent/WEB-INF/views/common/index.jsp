@@ -40,7 +40,7 @@
 	<div id="ventana" style="display: none;"></div>
 	<div class="x-hide-display" id="Headerx">
 		<div id="header"> 
-			<img style="float:left" src="../img/common/banner.png" width="100%" height="90">
+			<img style="float:left" width="100%" height="90">
 		</div>
 	</div>
 	

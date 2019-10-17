@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="filterChainProxy" class="org.springframework.security.util.FilterChainProxy">
+		<sec:filter-chain-map path-type="ant">
+			<sec:filter-chain filters="httpSessionContextIntegrationFilter, inspektrClientInfoFilter, channelProcessingFilter, jdbcConnectionDownFilter,authProcessingFilter, concurrentSessionFilter, exceptionTranslationFilter, filterInvocationInterceptor, adminLogoutFilter" pattern="/**"/>
+		</sec:filter-chain-map>
+	</bean>
+	
+	<bean id="inspektrClientInfoFilter" class="org.inspektr.common.web.ClientInfoThreadLocalFilter"/>
+	
+	<bean id="jdbcConnectionDownFilter" class="org.archetype.common.web.utils.JDBCConnectionDownFilter">
+		<property name="lostDB" value="./common/errorConnection.htm"/>
+	</bean>
+	
+	<bean id="httpSessionContextIntegrationFilter" class="org.springframework.security.context.HttpSessionContextIntegrationFilter">	
+		<property name="contextClass" value="org.archetype.common.domain.SecurityContext"/>
+		<property name="forceEagerSessionCreation" value="true"/>
+	</bean>
+	
+	<bean id="authProcessingFilter" class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="authenticationFailureUrl" value="/common/login.htm"/>
+		<property name="defaultTargetUrl" value="/common/index.htm"/>
+		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+	</bean>
+	
+	<bean id="authProcessingFilterEntryPoint" class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+		<property name="loginFormUrl" value="/common/login.htm"/>
+		<property name="forceHttps" value="false"/>
+	</bean>
+	
+	<!-- 
+	<bean id="checkIpAddressChangesFilter" class="cu.uci.filtros.CheckIpAddressChangesFilter">	
+		<property name="sessionRegistry">
+			<ref bean="sessionRegistry"/>
+		</property>
+	</bean>	
+	-->
+	
+	<bean id="sessionUpdater" class="org.archetype.common.web.utils.ActualizarSessionInformationImpl">	
+		<property name="sessiones" ref="sessionRegistry"/>
+		<property name="timeToExpire" value="5"/>
+	</bean>	
+   
+	<bean id="exceptionTranslationFilter" class="org.springframework.security.ui.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="authProcessingFilterEntryPoint"/>
+		<property name="accessDeniedHandler" ref="accessDeniedHandlerImpl"/>
+	</bean>
+   
+   	<bean id="accessDeniedHandlerImpl" class="org.springframework.security.ui.AccessDeniedHandlerImpl">
+		<property name="errorPage" value="/common/accessDenied.htm"/>
+	</bean>
+	
+	<bean id="adminLogoutFilter" class="org.springframework.security.ui.logout.LogoutFilter">
+	    <constructor-arg value="/login.htm"/>
+	    <constructor-arg>
+	        <list>
+				<ref bean="adminLogoutHandler"/>
+	        </list>
+	    </constructor-arg>
+	</bean>
+	
+	<bean id="adminLogoutHandler" class="org.archetype.common.web.utils.AdminLogoutHandler">	
+		<property name="sessiones" ref="sessionRegistry"/>
+	</bean>	
+			
+	<bean id="filterInvocationInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="accessDecisionManager" ref="httpRequestAccessDecisionManager"/>
+		<property name="objectDefinitionSource" ref="accessDefinitionSource"/>
+	</bean>
+			
+	<bean id="checkUserAccessToUrl" class="org.archetype.common.web.utils.CheckUserAccessToUrl">
+		<property name="accessDecisionManager" ref="httpRequestAccessDecisionManager"/>
+		<property name="objectDefinitionSource" ref="accessDefinitionSource"/>
+	</bean>
+		
+	<bean id="accessDefinitionSource" class="org.archetype.common.web.utils.AccessDefinitionSource">
+		<!-- <property name="objectDefinitionSource">
+			<value>
+			     PATTERN_TYPE_APACHE_ANT 
+ 			     /common/index.htm = Administrador, Planificador, Consulta, Especialista 			     
+ 				 /common/*Usuario.* = Administrador
+				 /common/*Rol.* = Administrador
+				 /common/*Security.* = Administrador
+			</value>
+		</property> -->
+		<property name="servicio" ref="accionService"/>		
+	</bean>
+				 		
+	<bean id="authenticationManager" class="org.springframework.security.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider"/>  			
+			</list>
+		</property>
+		<property name="sessionController" ref="concurrentSessionController"/>
+   	</bean>
+   
+   	<bean id="concurrentSessionFilter" class="org.springframework.security.concurrent.ConcurrentSessionFilter">
+		<property name="sessionRegistry" ref="sessionRegistry"/>
+		<property name="expiredUrl" value="/common/expired.htm"/>
+	</bean>
+	
+	<bean id="daoAuthenticationProvider" class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="seguridadUserDetails"/>
+ 		 <property name="passwordEncoder" ref="passwordEncoder"/>
+		<!--<property name="userCache" ref="userCache"/>-->
+	</bean>
+	
+	<bean id="seguridadUserDetails" class="org.archetype.common.web.utils.SeguridadUserDetails" >
+		<property name="servicio" ref="usuarioService"/>					
+	</bean>
+   
+	<bean id="httpRequestAccessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false"/>
+		<property name="decisionVoters">
+			<list>
+				<ref bean="roleVoter"/>
+			</list>
+		</property>
+	</bean>
+   
+	<bean id="roleVoter" class="org.springframework.security.vote.RoleVoter">	
+		<property name="rolePrefix">
+			<value></value>
+		</property>
+	</bean> 
+	
+	<bean id="concurrentSessionController" class="org.archetype.common.web.utils.UsuariosConcurrentesController">
+		<property name="sessionRegistry" ref="sessionRegistry"/>
+	</bean>	
+	
+	<bean id="sessionRegistry" class="org.archetype.common.domain.RegistrySessionImpl"/>
+	
+	<bean id="loggerListener" class="org.archetype.common.web.utils.LogoutLoggerListener"/>
+	
+	<bean id="channelProcessingFilter" class="org.springframework.security.securechannel.ChannelProcessingFilter">
+		<property name="channelDecisionManager" ref="channelDecisionManager"/>
+		<property name="filterInvocationDefinitionSource">
+			<value>				
+				PATTERN_TYPE_APACHE_ANT
+					<!-- Conexion por https, descomentarear la linea de abajo -->
+					<!-- /**=REQUIRES_SECURE_CHANNEL -->
+			 </value>
+		</property>
+	</bean>
+	
+	<bean id="channelDecisionManager" class="org.springframework.security.securechannel.ChannelDecisionManagerImpl">
+		<property name="channelProcessors">
+			<list>								
+				<ref bean="insecureChannelProcessor"/>
+				<ref bean="secureChannelProcessor"/>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="secureChannelProcessor" class="org.springframework.security.securechannel.SecureChannelProcessor" />
+	
+	<bean id="insecureChannelProcessor" class="org.springframework.security.securechannel.InsecureChannelProcessor"/>
+	
+	<bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder">
+		<constructor-arg index="0" value="256"/>
+	</bean>
+		
+</beans>
