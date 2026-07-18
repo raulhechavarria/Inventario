@@ -1,8 +1,6 @@
 package org.archetype.common.web.utils;
 
-/**
- * @author Axel Mendoza Pupo
- */
+
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -36,6 +34,7 @@ import org.springframework.web.servlet.mvc.multiaction.MethodNameResolver;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver;
 import org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
 @SuppressWarnings("all")
 public class AccessDefinitionSource implements ApplicationContextAware, FilterInvocationDefinitionSource, InitializingBean{

@@ -1,8 +1,5 @@
 package org.archetype.common.domain;
 
-/**
- * @author Axel Mendoza Pupo
- */
 
 import java.util.Date;
 import java.util.HashMap;

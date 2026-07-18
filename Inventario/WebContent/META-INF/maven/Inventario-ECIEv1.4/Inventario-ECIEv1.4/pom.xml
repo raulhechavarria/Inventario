@@ -1,24 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Inventario-ECIEv1.4</groupId>
 	<artifactId>Inventario-ECIEv1.4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<properties>
+		<java.version>1.8</java.version> <!-- or 17, or 1.8 -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 	<dependencies>
-
-
-<!-- https://mvnrepository.com/artifact/aspectj/aspectjweaver -->
-<dependency>
-    <groupId>aspectj</groupId>
-    <artifactId>aspectjweaver</artifactId>
-    <version>1.5.3</version>
-</dependency>
-
-
-
-
-
 
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
@@ -29,53 +22,58 @@
 		</dependency>
 
 
-
-		<!-- https://mvnrepository.com/artifact/com.sun.jdmk/jmxtools -->
+		<!-- https://mvnrepository.com/artifact/com.sun.jdmk/jmxtools 
 		<dependency>
 			<groupId>com.sun.jdmk</groupId>
 			<artifactId>jmxtools</artifactId>
 			<version>1.2</version>
-		</dependency>
+		</dependency>-->
 
-		<!-- https://mvnrepository.com/artifact/org.glassfish.main.javaee-api/javax.jms -->
+		<!--
+		https://mvnrepository.com/artifact/org.glassfish.main.javaee-api/javax.jms -->
 		<dependency>
 			<groupId>org.glassfish.main.javaee-api</groupId>
 			<artifactId>javax.jms</artifactId>
 			<version>3.1.2.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.sun.jmx/jmxri -->
+		<!-- https://mvnrepository.com/artifact/com.sun.jmx/jmxri 
 		<dependency>
 			<groupId>com.sun.jmx</groupId>
 			<artifactId>jmxri</artifactId>
 			<version>1.2.1</version>
-		</dependency>
+		</dependency>-->
 
 
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-annotations-api</artifactId>
+			<scope>provided</scope>
 			<version>7.0.92</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina-ant</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina-ha</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-tribes</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jdt.core.compiler</groupId>
@@ -86,26 +84,31 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-el-api</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper-el</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jsp-api</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>7.0.92</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
@@ -196,13 +199,13 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.1_3</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<!--
+		https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.7.0</version>
 		</dependency>
-
 
 
 		<dependency>
@@ -314,7 +317,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>1.2.17</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -391,12 +394,12 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>2.0.2</version>
+			<version>2.0.8.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>2.0.2</version>
+			<version>2.0.8.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -454,8 +457,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -464,6 +467,11 @@
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.2</version>
 			</plugin>
 		</plugins>
 	</build>
